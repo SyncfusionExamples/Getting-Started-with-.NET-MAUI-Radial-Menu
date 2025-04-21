@@ -15,6 +15,7 @@ namespace RadialMenuSample
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("MauiMaterialAssets.ttf", "Maui Material Assets");
                 });
 
 #if DEBUG
