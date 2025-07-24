@@ -1,20 +1,165 @@
-This package contains[.NET MAUI Radial Menu](https://www.syncfusion.com/maui-controls/maui-radial-menu) component for .NET MAUI application
 
-### System Requirements
+# Getting Started with .NET MAUI RadialMenu (SfRadialMenu)
 
-* [System Requirements](https://help.syncfusion.com/maui/system-requirements)
+This section provides a quick overview for working with the SfRadialMenu for .NET MAUI. Walk through the entire process of creating a real world of this control.
 
-### Radial Menu
+## Creating an application using the .NET MAUI RadialMenu
+ 1. Create a new .NET MAUI application in Visual Studio.
+ 2. Syncfusion .NET MAUI components are available on [nuget.org](https://www.nuget.org/). To add SfRadialMenu to your project, open the NuGet package manager in Visual Studio, search for Syncfusion.Maui.RadialMenu and then install it.
 
-The Syncfusion [.NET MAUI Radial Menu](https://www.syncfusion.com/maui-controls/maui-radial-menu) it displays menu items in a circular layout.It can accommodate more menu items in the given space than the traditional vertical or horizontal menu.
+## Register the handler
 
-![.NET MAUI Radial Menu](https://cdn.syncfusion.com/nuget-readme/maui/net_maui_radialmenu.gif)
+To use this control inside an application, you must register the handler for Syncfusion® core.
 
-[Features Overview](https://www.syncfusion.com/maui-controls/maui-radial-menu) | [Docs](https://help.syncfusion.com/maui/radial-menu/overview) | [Online Demo](https://github.com/syncfusion/maui-demos) | [Support](https://support.syncfusion.com/support/tickets/create) | [Forums](https://www.syncfusion.com/forums/maui) | [Feedback](https://www.syncfusion.com/feedback/maui)
+**MauiProgram.cs**
+```
+using Microsoft.Extensions.Logging;
+using Syncfusion.Maui.Core.Hosting;
 
-#### Getting Started
+namespace RadialMenuGettingStarted
+{
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                });
 
-* [Getting Started with .NET MAUI Radial Menu](https://help.syncfusion.com/maui/radial-menu/getting-started)
+#if DEBUG
+    		builder.Logging.AddDebug();
+#endif
+
+            return builder.Build();
+        }
+    }
+}
+
+```
+
+## Add a basic SfRadialMenu
+1. Import the control namespace `Syncfusion.Maui.RadialMenu` in XAML or C# code.
+2. Initialize [SfRadialMenu](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Buttons.SfRadialMenu.html) control.
+
+**XAML**
+```
+<ContentPage
+    . . .    
+    xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
+        <radialMenu:SfRadialMenu />
+</ContentPage>
+```
+
+**C#**
+```
+using Syncfusion.Maui.Core;
+. . .
+
+    using Syncfusion.Maui.RadialMenu;
+    namespace RadialMenuGettingStarted
+    {
+        public partial class MainPage : ContentPage
+        {
+            public MainPage()
+            {
+                InitializeComponent();           
+                 SfRadialMenu radialMenu = new SfRadialMenu();
+                this.Content = radialMenu;
+            }
+        }   
+    }
+
+```
+
+## Adding Radial Menu with items
+
+**XAML**
+
+```
+<ContentPage 
+            ...
+             xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
+        <radialMenu:SfRadialMenu x:Name="radialMenu" 
+                                CenterButtonText="Edit"
+                                CenterButtonFontSize="15">
+            <radialMenu:SfRadialMenu.Items>
+                <radialMenu:SfRadialMenuItem Text="Cut"
+                                            FontSize="15"/>
+                <radialMenu:SfRadialMenuItem Text="Copy"
+                                            FontSize="15"/>
+                <radialMenu:SfRadialMenuItem Text="Paste"
+                                            FontSize="15"/>
+                <radialMenu:SfRadialMenuItem Text="Crop"
+                                            FontSize="15"/>
+                <radialMenu:SfRadialMenuItem Text="Paint"
+                                            FontSize="15"/>
+            </radialMenu:SfRadialMenu.Items>
+        </radialMenu:SfRadialMenu>
+</ContentPage>
+```
+
+**C#**
+
+```
+using Syncfusion.Maui.RadialMenu;
+
+namespace RadialMenuGettingStarted
+{
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+
+            SfRadialMenu radialMenu = new SfRadialMenu()
+            {
+                CenterButtonText = "Edit",
+                CenterButtonFontSize = 15
+            };
+
+            RadialMenuItemsCollection itemCollection = new RadialMenuItemsCollection();
+            itemCollection.Add(new SfRadialMenuItem()
+            {
+                Text = "Cut",
+                FontSize = 15
+            });
+            itemCollection.Add(new SfRadialMenuItem()
+            {
+                Text = "Copy",
+                FontSize = 15
+            });
+            itemCollection.Add(new SfRadialMenuItem()
+            {
+                Text = "Paste",
+                FontSize = 15
+            });
+            itemCollection.Add(new SfRadialMenuItem()
+            {
+                Text = "Crop",
+                FontSize = 15
+            });
+            itemCollection.Add(new SfRadialMenuItem()
+            {
+                Text = "Paint",
+                FontSize = 15
+            });
+            radialMenu.Items = itemCollection;
+            this.Content = radialMenu;
+        }
+    }
+}
+
+```
+
+Run the application to render the following output:
+
+![.NET MAUI RadialMenu](maui-radialmenu-getting-started.png)
 
 ## License
 This is a commercial product and requires a paid license for possession or use. Syncfusion’s licensed software, including this component, is subject to the terms and conditions of [Syncfusion's EULA](https://www.syncfusion.com/eula/es/?utm_source=nuget&utm_medium=listing&utm_campaign=maui-signaturepad-nuget). You can purchase a license [here]( https://www.syncfusion.com/sales/products?utm_source=nuget&utm_medium=listing&utm_campaign=maui-signaturepad-nuget) or start a free 30-day trial [here](https://www.syncfusion.com/account/manage-trials/start-trials?utm_source=nuget&utm_medium=listing&utm_campaign=maui-signaturepad-nuget).
